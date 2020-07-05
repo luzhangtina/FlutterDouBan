@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:douban_app/widgets/search_text_field_widget.dart';
 import 'package:douban_app/pages/home/home_app_bar.dart' as myapp;
-import 'package:douban_app/http/http_request.dart';
 import 'package:douban_app/http/mock_request.dart';
 import 'package:douban_app/http/API.dart';
 import 'package:douban_app/bean/subject_entity.dart';
@@ -38,7 +37,7 @@ DefaultTabController getWidget() {
             // This is not necessary if the "headerSliverBuilder" only builds
             // widgets that do not overlap the next sliver.
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            child: myapp.SliverAppBar(
+            sliver: myapp.SliverAppBar(
               pinned: true,
               expandedHeight: 120.0,
               primary: true,

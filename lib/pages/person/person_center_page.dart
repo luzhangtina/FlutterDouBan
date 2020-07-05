@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:douban_app/constant/constant.dart';
 import 'package:douban_app/widgets/image/heart_img_widget.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:douban_app/constant/cache_key.dart';
 import 'package:douban_app/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 typedef VoidCallback = void Function();
 
 ///个人中心

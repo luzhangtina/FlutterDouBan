@@ -194,8 +194,8 @@ class _ImageProviderResolver {
             : null));
 
     if (_imageStream.key != oldImageStream?.key) {
-      oldImageStream?.removeListener(_handleImageChanged);
-      _imageStream.addListener(_handleImageChanged);
+      oldImageStream?.removeListener(ImageStreamListener(_handleImageChanged));
+      _imageStream.addListener(ImageStreamListener(_handleImageChanged));
     }
   }
 
@@ -205,7 +205,7 @@ class _ImageProviderResolver {
   }
 
   void stopListening() {
-    _imageStream?.removeListener(_handleImageChanged);
+    _imageStream?.removeListener(ImageStreamListener(_handleImageChanged));
   }
 }
 
@@ -456,19 +456,15 @@ class CachedNetworkImageProvider
   }
 
   @override
-  ImageStreamCompleter load(CachedNetworkImageProvider key) {
+  ImageStreamCompleter load(CachedNetworkImageProvider key, DecoderCallback decode) {
     return new MultiFrameImageStreamCompleter(
         codec: _loadAsync(key),
         scale: key.scale,
-        informationCollector: (StringBuffer information) {
-          information.writeln('Image provider: $this');
-          information.write('Image key: $key');
-        });
+        );
   }
 
   Future<ui.Codec> _loadAsync(CachedNetworkImageProvider key) async {
-    var cacheManager = await CacheManager.getInstance();
-    var file = await cacheManager.getFile(url, headers: headers);
+    var file = await DefaultCacheManager().getSingleFile(url, headers: headers);
     if (file == null) {
       if (errorListener != null) errorListener();
       return Future<ui.Codec>.error("Couldn't download or retreive file.");
