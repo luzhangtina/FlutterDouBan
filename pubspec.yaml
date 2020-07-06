@@ -38,6 +38,9 @@ dependencies:
 
   shared_preferences: ^0.5.7+3
 
+  # Easily restart application from scratch, losing any previous state.
+  flutter_phoenix: ^0.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
